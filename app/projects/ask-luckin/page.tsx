@@ -515,39 +515,37 @@ export default function AskLuckinPage() {
     as separate issues:
   </p>
 
-  <div className="grid gap-4 md:grid-cols-3">
-    {[
-      {
-        number: "01",
-        title: "Duplicate listings",
-      },
-      {
-        number: "02",
-        title: "Decision paralysis",
-      },
-      {
-        number: "03",
-        title: "Browsing fatigue",
-      },
-    ].map((item) => (
-      <div
-        key={item.number}
-        className="case-figure rounded-3xl border border-[#D8E7FC] bg-white p-6"
-      >
-        <span className="text-xs font-bold tracking-widest text-blue-500">
-          OBSERVATION {item.number}
-        </span>
+  
+<div className="grid gap-4 md:grid-cols-3">
+  {[
+    {
+      number: "01",
+      title: "Duplicate listings",
+    },
+    {
+      number: "02",
+      title: "Decision paralysis",
+    },
+    {
+      number: "03",
+      title: "Browsing fatigue",
+    },
+  ].map((item) => (
+    <div
+      key={item.number}
+      className="case-figure flex min-h-[150px] flex-col justify-between rounded-3xl border border-[#D8E7FC] bg-white p-6"
+    >
+      <span className="text-xs font-bold tracking-widest text-blue-500">
+        OBSERVATION {item.number}
+      </span>
 
-        <h4 className="mt-5 text-xl font-bold text-[#102D62]">
-          {item.title}
-        </h4>
+      <h4 className="mt-6 text-xl font-bold text-[#102D62]">
+        {item.title}
+      </h4>
+    </div>
+  ))}
+</div>
 
-        <p className="mt-4 text-sm leading-relaxed text-[#58708F]">
-          {item.description}
-        </p>
-      </div>
-    ))}
-  </div>
 
   {/* Connection */}
   <div className="my-9 flex justify-center">
@@ -603,7 +601,6 @@ export default function AskLuckinPage() {
 
         {/* 03 EXPLORATION */}
         <Chapter
-          number="03 / 08"
           id="exploration"
           title="Exploring Better Starting Points"
         >
@@ -660,7 +657,7 @@ export default function AskLuckinPage() {
 
         {/* 04 DECISION */}
         <Chapter
-          number="04 / 08"
+          
           id="selection"
           title="Narrowing Down"
         >
@@ -725,7 +722,7 @@ export default function AskLuckinPage() {
 
         {/* 05 CHALLENGE */}
         <Chapter
-          number="05 / 08"
+          
           id="challenge"
           title="Challenge"
         >
@@ -799,7 +796,7 @@ export default function AskLuckinPage() {
 
         {/* 06 REFINEMENT */}
         <Chapter
-          number="06 / 08"
+          
           id="refinement"
           title="Refinement"
         >
@@ -876,7 +873,7 @@ export default function AskLuckinPage() {
 
         {/* 07 EVALUATION */}
         <Chapter
-          number="07 / 08"
+          
           id="evaluation"
           title="Usability Testing"
         >
@@ -957,7 +954,7 @@ export default function AskLuckinPage() {
 
         {/* 08 REFLECTION */}
         <Chapter
-          number="08 / 08"
+        
           id="reflection"
           title="Reflection"
         >
