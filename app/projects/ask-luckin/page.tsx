@@ -1,6 +1,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import WizardFlow from "@/components/WizardFlow";
+import MyContributions from "@/components/MyContributions";
 
 const imageFolder = "/images/ask-luckin/";
 
@@ -18,7 +20,7 @@ function Gallery({
 }) {
   return (
     <div
-      className={`my-10 grid gap-5 ${
+      className={`case-gallery my-10 grid gap-5 ${
         columns === 3
           ? "md:grid-cols-3"
           : columns === 2
@@ -41,13 +43,19 @@ function Gallery({
               rel="noopener noreferrer"
               aria-label={`View ${photo.caption}`}
             >
-              <Image
-                src={src}
-                alt={photo.caption}
-                width={1200}
-                height={900}
-                className="h-auto max-h-[600px] w-full rounded-2xl object-contain"
-              />
+              
+
+<div className="flex w-full items-start justify-center overflow-hidden rounded-2xl bg-white">
+  <Image
+    src={src}
+    alt={photo.caption}
+    width={1200}
+    height={900}
+    className="h-auto w-full object-contain"
+  />
+</div>
+
+
             </a>
             <figcaption className="px-3 py-3 text-sm text-slate-500">
               {photo.caption}
@@ -59,13 +67,12 @@ function Gallery({
   );
 }
 
+
 function Chapter({
-  number,
   id,
   title,
   children,
 }: {
-  number: string;
   id: string;
   title: string;
   children: React.ReactNode;
@@ -75,18 +82,17 @@ function Chapter({
       id={id}
       className="case-section scroll-mt-24 border-t border-blue-100 py-20 md:py-28"
     >
-      <div className="mb-12 flex items-start gap-5 md:gap-10">
-        <span className="pt-2 text-sm font-bold text-blue-600">
-          {number}
-        </span>
+      <div className="mb-12">
         <h2 className="text-4xl font-black tracking-tight text-[#102D62] md:text-5xl">
           {title}
         </h2>
       </div>
+
       {children}
     </section>
   );
 }
+
 
 function Copy({ children }: { children: React.ReactNode }) {
   return (
@@ -247,7 +253,7 @@ export default function AskLuckinPage() {
       <article className="mx-auto max-w-6xl px-6">
 
         {/* 01 MOTIVATION */}
-        <Chapter number="01 / 08" id="motivation" title="Motivation">
+        <Chapter id="motivation" title="Motivation">
           <div className="mx-auto max-w-3xl space-y-5">
             <Highlight>
               A blue deer has become difficult to miss in Singapore.
@@ -268,10 +274,6 @@ export default function AskLuckinPage() {
               {
                 file: "blue deer has become difficult to miss.png",
                 caption: "The familiar Luckin Coffee blue deer",
-              },
-              {
-                file: "many luckin branches.png",
-                caption: "Luckin Coffee branches in Singapore",
               },
             ]}
           />
@@ -305,7 +307,6 @@ export default function AskLuckinPage() {
 
         {/* 02 RESEARCH */}
         <Chapter
-          number="02 / 08"
           id="research"
           title="Uncovering Pain Points"
         >
@@ -383,16 +384,13 @@ export default function AskLuckinPage() {
           
 {/* Interview findings */}
 <div className="mt-16">
-  <p className="text-sm font-bold uppercase tracking-widest text-blue-600">
-    From interviews to insights
-  </p>
 
   <h3 className="mt-3 text-3xl font-bold text-[#102D62]">
-    What were customers telling me?
+    What were users telling me?
   </h3>
 
   <p className="mt-4 max-w-2xl text-slate-600">
-    These excerpts revealed different frustrations with
+    These quotes revealed different frustrations with
     the menu, but they pointed towards a common problem.
   </p>
 
@@ -401,22 +399,19 @@ export default function AskLuckinPage() {
       {
         number: "01",
         quote:
-          "If you're just browsing, it can take longer because there are many categories...",
-        theme: "Browsing effort",
+          "A drink I saw appeared under another category...I wonder whether it's the same or different version so I scroll back up to double check.",
         rotation: "md:-rotate-2",
       },
       {
         number: "02",
         quote:
-          "The categories aren't explained properly.",
-        theme: "Unclear labels",
+          "Constantly marketing and releasing new drinks and promotions...lead to some decision paralysis, if you're a new user.",
         rotation: "md:rotate-2",
       },
       {
         number: "03",
         quote:
-          "Is this the same drink or a different version?",
-        theme: "Repeated listings",
+          "If you're just browsing, it can take longer because there are many categories, seasonal drinks and recommendations.",
         rotation: "md:-rotate-1",
       },
     ].map((item) => (
@@ -426,7 +421,7 @@ export default function AskLuckinPage() {
       >
         <div className="mb-5 flex items-center justify-between">
           <span className="text-xs font-bold tracking-widest text-blue-500">
-            VOICE {item.number}
+            INTERVIEWEE {item.number}
           </span>
           <span className="text-3xl text-blue-300">
             ”
@@ -437,9 +432,6 @@ export default function AskLuckinPage() {
           “{item.quote}”
         </blockquote>
 
-        <figcaption className="mt-7 inline-block rounded-full bg-blue-50 px-4 py-2 text-xs font-semibold text-blue-700">
-          {item.theme}
-        </figcaption>
 
         <div className="absolute -bottom-3 left-9 h-5 w-5 rotate-45 border-b-2 border-r-2 border-[#D7E7FF] bg-white" />
       </figure>
@@ -447,9 +439,7 @@ export default function AskLuckinPage() {
   </div>
 
   <p className="mt-10 max-w-3xl text-sm leading-relaxed text-slate-500">
-    Selected excerpts from five semi-structured interviews.
-    The highlighted comments helped inform the subsequent
-    thematic analysis.
+    Selected comments from five semi-structured interviews.
   </p>
 </div>
 
@@ -459,8 +449,7 @@ export default function AskLuckinPage() {
     After each interview, I did not immediately turn every
     comment into a solution. I first brought the responses
     together and colour-coded them, a lightweight
-    affinity-mapping exercise used to move from raw
-    comments to recurring patterns.
+    affinity-mapping exercise.
   </Copy>
 </div>
 
@@ -483,12 +472,12 @@ export default function AskLuckinPage() {
     </p>
 
     <h3 className="mt-4 text-3xl font-bold text-[#102D62]">
-      From individual comments to recurring themes.
+      From raw comments to recurring patterns.
     </h3>
 
     <p className="mt-5 leading-relaxed text-slate-600">
       I colour-coded interview responses into themes,
-      allowing me to compare observations across participants
+      according to this legend
       instead of treating every comment as an isolated issue.
     </p>
 
@@ -500,12 +489,7 @@ export default function AskLuckinPage() {
   </div>
 </div>
 
-{/* Research finding */}
-<div className="mx-auto mt-16 max-w-3xl space-y-5">
-  <Copy>
-    I started noticing a pattern in Drink Categorisation.
-  </Copy>
-</div>
+
 
 {/* Synthesis: separate from the legend */}
 <div className="mt-12">
@@ -514,57 +498,106 @@ export default function AskLuckinPage() {
   </p>
 
   <h3 className="mt-3 text-3xl font-bold text-[#102D62]">
-    What did these observations mean?
+    I started noticing a pattern in Drink Categorisation.
   </h3>
 
-  <Gallery
-    columns={1}
-    photos={[
-      {
-        file: "my synthesis.png",
-        caption: "My synthesis of the research findings",
-      },
-    ]}
-  />
+
 </div>
             <div className="mx-auto max-w-3xl space-y-5">
-            <Copy>
-              When I first coded these comments, I treated them
-              as separate issues:
-            </Copy>
+            
+{/* Connecting the dots: observations to insight */}
+<div className="my-12">
 
-            <Copy>
-              duplicate listings, a crowded menu and unclear
-              category names.
-            </Copy>
 
-            <Copy>
-              But reading them together changed my interpretation.
-            </Copy>
+  {/* Initial observations */}
+  <p className="mb-6 text-lg text-[#425773]">
+    When I first coded these comments, I treated them
+    as separate issues:
+  </p>
 
-            <Copy>
-              Users were spending effort working out what each
-              option meant before deciding on their drink.
-            </Copy>
+  <div className="grid gap-4 md:grid-cols-3">
+    {[
+      {
+        number: "01",
+        title: "Duplicate listings",
+      },
+      {
+        number: "02",
+        title: "Decision paralysis",
+      },
+      {
+        number: "03",
+        title: "Browsing fatigue",
+      },
+    ].map((item) => (
+      <div
+        key={item.number}
+        className="case-figure rounded-3xl border border-[#D8E7FC] bg-white p-6"
+      >
+        <span className="text-xs font-bold tracking-widest text-blue-500">
+          OBSERVATION {item.number}
+        </span>
 
-            <Copy>
-              Repeated drinks created confusion, unclear labels
-              made it harder to rule options out, and browsing
-              became slower because users had to scroll back
-              and compare.
-            </Copy>
+        <h4 className="mt-5 text-xl font-bold text-[#102D62]">
+          {item.title}
+        </h4>
 
-            <Copy>
-              This was the moment I realised that the category
-              system was not doing the job it was meant to do:
-              helping them narrow down choices.
-            </Copy>
+        <p className="mt-4 text-sm leading-relaxed text-[#58708F]">
+          {item.description}
+        </p>
+      </div>
+    ))}
+  </div>
 
-            <Highlight>
-              This became the key insight that shaped our direction:
-              people need help narrowing the decision before
-              they start browsing.
-            </Highlight>
+  {/* Connection */}
+  <div className="my-9 flex justify-center">
+    <div className="flex flex-col items-center gap-2">
+      <span className="text-4xl text-blue-500">↓</span>
+    </div>
+  </div>
+
+  <div className="case-figure rounded-3xl bg-[#E7F0FF] p-8 md:p-10">
+    <p className="text-xs font-bold uppercase tracking-widest text-blue-600">
+      MY INTERPRETATION
+    </p>
+
+    <h4 className="mt-5 text-2xl font-bold leading-snug text-[#102D62] md:text-3xl">
+      Users were spending effort working out what each
+      option meant before deciding on their drink.
+    </h4>
+
+    <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-[#425773]">
+      <p>
+        Seeing the big picture helped form this interpretation.
+      </p>
+
+
+      <p>
+        This was the moment I realised that the category
+        system was not doing the job it was meant to do:
+        helping them narrow down choices.
+      </p>
+    </div>
+  </div>
+
+  {/* Final insight */}
+  <div className="my-9 flex justify-center">
+    <span className="text-4xl text-blue-500">↓</span>
+  </div>
+
+  <div className="case-figure rounded-3xl bg-[#102D62] p-8 text-white md:p-12">
+    <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
+      THE KEY INSIGHT
+    </p>
+
+    <h4 className="mt-5 max-w-4xl text-3xl font-black leading-tight tracking-tight md:text-4xl">
+      People need help narrowing the
+      decision before they start browsing.
+    </h4>
+  </div>
+
+</div>
+
           </div>
         </Chapter>
 
@@ -686,17 +719,15 @@ export default function AskLuckinPage() {
               not just what to compare.
             </h3>
 
-            <p className="mt-5 text-blue-200">
-              An optional wizard alongside the familiar menu.
-            </p>
+        
           </div>
         </Chapter>
 
-        {/* 05 CHALLENGES */}
+        {/* 05 CHALLENGE */}
         <Chapter
           number="05 / 08"
-          id="challenges"
-          title="Challenges"
+          id="challenge"
+          title="Challenge"
         >
           <div className="mx-auto max-w-3xl space-y-5">
             <Highlight>
@@ -748,6 +779,9 @@ export default function AskLuckinPage() {
             ]}
           />
 
+          {/* Interactive explanation of the conditional wizard flow */}
+<WizardFlow />
+
           <div className="mx-auto max-w-3xl space-y-5">
             <Copy>
               Then I worked with the team to sequence each
@@ -798,7 +832,7 @@ export default function AskLuckinPage() {
               },
               {
                 file: "luckin prototype 2.png",
-                caption: "Further prototype screens",
+                caption: "Ask Luckin prototype screens",
               },
             ]}
           />
@@ -881,18 +915,7 @@ export default function AskLuckinPage() {
             </div>
           </div>
 
-          <div className="mx-auto max-w-3xl space-y-5">
-            <Copy>
-              The average ease-of-decision score increased
-              from 3.85 to 4.36 out of 5: a 13.2% increase
-              from the first survey we conducted.
-            </Copy>
-
-            <Copy>
-              The average feeling of overwhelm also fell
-              from 2.54 to 1.85 out of 5, a 27.2% reduction.
-            </Copy>
-          </div>
+          
 
           <Gallery
             photos={[
@@ -930,6 +953,8 @@ export default function AskLuckinPage() {
           </div>
         </Chapter>
 
+<MyContributions />
+
         {/* 08 REFLECTION */}
         <Chapter
           number="08 / 08"
@@ -966,9 +991,8 @@ export default function AskLuckinPage() {
               Ask Luckin Wizard can make deciding feel
               easier. But I worry that if it narrows
               choices too aggressively, it may filter
-              off an option a user would have preferred.
-              Therefore, if I continued the project,
-              I would test the feature in a live,
+              off an option a user would have preferred. 
+            Therefore, I would also want to test the feature in a live,
               task-based study with a wider and more
               varied group of Luckin customers.
               I would compare the usual menu against
@@ -988,25 +1012,67 @@ export default function AskLuckinPage() {
           </div>
         </Chapter>
 
-        {/* Footer */}
-        <footer className="border-t border-blue-100 py-16">
-          <h2 className="text-2xl font-bold text-[#102D62]">
-            Explore the final prototype here!
-          </h2>
+        
+{/* Closing thought */}
+<section className="case-section py-20 text-center md:py-28">
+  <div className="mx-auto max-w-3xl">
 
-          <p className="mt-5 max-w-3xl leading-relaxed text-slate-600">
-            Ask Luckin was developed as a team project
-            by Claudia, Tse Yee, Jiahao and Anastasia
-            for DV2008 Interface Design.
-          </p>
+    <p className="text-sm font-semibold tracking-widest text-blue-600">
+      ONE LAST THOUGHT
+    </p>
 
-          <Link
-            href="/"
-            className="print-hide mt-10 inline-block rounded-full bg-[#102D62] px-7 py-4 font-semibold text-white transition hover:bg-blue-700"
-          >
-            ← Back to Portfolio
-          </Link>
-        </footer>
+    <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-[#425773]">
+      Looking back, what started as an attempt to improve
+      Luckin&apos;s menu turned into an exploration of how
+      people make decisions.
+    </p>
+
+    <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-[#425773]">
+      Ask Luckin may not be something every customer needs,
+      but for someone who opens the app without knowing
+      what to order, I hope it can make that small moment
+      of uncertainty a little easier :) 
+    </p>
+
+  </div>
+</section>
+
+        
+<footer className="border-t border-blue-100 py-16">
+  <div className="rounded-3xl bg-[#E8F2FF] p-8 md:p-12">
+    <p className="text-sm font-bold tracking-widest text-blue-600">
+      WANT TO SEE THE FINAL DESIGN?
+    </p>
+
+    <h2 className="mt-4 text-3xl font-black text-[#102D62] md:text-4xl">
+      Experience Ask Luckin yourself!
+    </h2>
+
+
+    <a
+      href="https://www.figma.com/proto/yc8jItMZ8jw4HKPYKC7KN2/Better-Luckin?node-id=113-312&t=VZ0zHLp9sj6gCeju-1&scaling=scale-down&content-scaling=fixed&page-id=1%3A2&starting-point-node-id=113%3A312"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#102D62] px-7 py-4 font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700"
+    >
+      Click here to try the prototype!
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <p className="mt-10 max-w-3xl leading-relaxed text-slate-600">
+    Ask Luckin was developed as a team project by Claudia,
+    Tse Yee, Jiahao and Anastasia for DV2008 Interface Design.
+  </p>
+
+  <Link
+    href="/"
+    className="print-hide mt-8 inline-block font-semibold text-blue-700 hover:underline"
+  >
+    ← Back to Portfolio
+  </Link>
+</footer>
+
       </article>
     </main>
   );

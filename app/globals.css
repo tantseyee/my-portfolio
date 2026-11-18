@@ -128,3 +128,129 @@
     @apply font-sans;
   }
 }
+
+
+/* Smooth navigation on the website */
+html {
+  scroll-behavior: smooth;
+}
+
+/* PDF and print adjustments */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide navigation when printing */
+  nav {
+    display: none !important;
+  }
+
+  /* Keep important concept cards together */
+  .concept-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  /* Disable motion when printing */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* PDF / PRINT OPTIMISATION */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    scroll-behavior: auto !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide navigation and website-only elements */
+  nav,
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Reduce excessive website spacing */
+  .case-section {
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+  }
+
+  /* Prevent headings from being stranded at page bottoms */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Keep images and captions together */
+  figure,
+  .case-figure {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  /* Reduce oversized image display in PDF */
+  .case-figure img {
+    max-height: 115mm !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin-inline: auto;
+  }
+
+  /* More readable paragraph layout */
+  .article-copy {
+    font-size: 10.5pt !important;
+    line-height: 1.55 !important;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Avoid unexpected movement */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  /* Display galleries as single-column rows in PDF */
+.case-gallery {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+}
+}

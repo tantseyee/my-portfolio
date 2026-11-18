@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
+import WizardFlow from "@/components/WizardFlow";
 
 export default function Home() {
   return (
